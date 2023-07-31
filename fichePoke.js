@@ -86,7 +86,7 @@ let pokemonType = document.getElementById("pokemon-type");
 
 switch (capitalizedType) {
   case 'Plante':
-    type.innerHTML = '<img id="type-img" src="images/plante.png" alt="type plante">';
+    type.innerHTML = '<img class="types" src="images/plante.png" alt="type plante">';
     pokemonType.style.color = `${colours.Plante}`
     pokemonType.innerHTML = "Plante"
     
