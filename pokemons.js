@@ -63,6 +63,7 @@ const colours = {
 	Fée: '#D685AD',
 };
 
+
 let selectedPokemon; // Déclaration de la variable à l'extérieur de la fonction displayData()
 
 function displayData() {
@@ -104,7 +105,6 @@ function displayData() {
     // Si l'utilisateur a atteint la fin de la page, affichez le prochain groupe de Pokémon
     if (scrollPosition + windowHeight >= totalHeight) {
       displayData();
-      // displayPokemonsByType()
     }
   });
 
