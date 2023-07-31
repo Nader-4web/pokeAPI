@@ -1,1 +1,111 @@
-<!DOCTYPE html><html lang="fr"><head> <meta charset="UTF-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <link rel="stylesheet" href="style.css"> <link rel="stylesheet" href="fiche.css"> <title>Pokemon App</title> <link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Secular+One&display=swap" rel="stylesheet"> <script src="https://kit.fontawesome.com/b97639225c.js" crossorigin="anonymous"></script></head><body> <div class="overlay"></div><div class="loading"> <div class="block-loading"> <img id="pokeball" src="images/pokeball-4.png" alt=""> </div></div><div id="go-back"> <a href="index.html"><i class="fa-solid fa-arrow-left"></i></a> </div><div id="header"> <img class="pokemon-logo" src="images/pokemon-logo.png" alt=""> <div id="search-bar"> <input type="text" id="textvalue" placeholder="Ex: Pikachu ou 25"> <submit id="submit"><i class="fa-solid fa-magnifying-glass"></i></submit> <p id="not-found"></p></div></div><div class="type-container"> <div class="type"></div><div id="pokemon-type"></div></div><div id="wrapper"> </div><a href="#header"><div id="top-of-page"><i class="fa-solid fa-arrow-up"></i></div></a> <div class="fiche"> <div id="close-card"><i class="fa-solid fa-circle-xmark"></i></div><div class="header"> <p id="name-fiche"></p><div class="block-element"> <div class="block-img-element"></div><div class="block-type"></div></div></div><div class="img-container"> <img id="img-poke-fiche" src=""> </div><div id="stats"> <div class="stat"> <p class="stat-desc stat-desc-atk">Atk:</p><p class="stat-desc stat-desc-def">Def:</p><p class="stat-desc stat-desc-hp">Hp:</p><p class="stat-desc stat-desc-spe-atk">Spe_Atk:</p><p class="stat-desc stat-desc-spe-def">Spe_Def:</p><p class="stat-desc stat-desc-vit">Vit:</p></div><div class="block-range"> <div class="container-range"> <div class="range-container"> <span class="range range-atk" ></span> </div></div><div class="stat"> <div class="container-range"> <div class="range-container"> <span class="range range-def" ></span> </div></div></div><div class="stat"> <div class="container-range"> <div class="range-container"> <span class="range range-hp" ></span> </div></div></div><div class="stat"> <div class="container-range"> <div class="range-container"> <span class="range range-spe-atk" ></span> </div></div></div><div class="stat"> <div class="container-range"> <div class="range-container"> <span class="range range-spe-def" ></span> </div></div></div><div class="stat"> <div class="container-range"> <div class="range-container"> <span class="range range-vit" ></span> </div></div></div></div></div></div><script src="fichePoke.js"></script> </body>
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <title>Pokemon App</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Secular+One&display=swap" rel="stylesheet" />
+        <script src="https://kit.fontawesome.com/b97639225c.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div class="overlay"></div>
+        <div class="loading">
+            <div class="block-loading"><img id="pokeball" src="images/pokeball-4.png" alt="" /></div>
+        </div>
+        <div id="go-back">
+            <a href="index.html"><i class="fa-solid fa-arrow-left"></i></a>
+        </div>
+        <div id="header">
+            <img class="pokemon-logo" src="images/pokemon-logo.png" alt="" />
+            <div id="search-bar">
+                <input type="text" id="textvalue" placeholder="Ex: Pikachu ou 25" /> <submit id="submit"><i class="fa-solid fa-magnifying-glass"></i></submit>
+                <p id="not-found"></p>
+            </div>
+        </div>
+
+        <div class="types-container">
+            <a href="pokemon.html?type=plante"><img class="types" src="images/plante.png" alt=""></a>
+            <a href="pokemon.html?type=eau"><img class="types" src="images/eau.png" alt=""></a>
+            <a href="pokemon.html?type=feu"><img class="types" src="images/feu.png" alt=""></a>
+            <a href="pokemon.html?type=électrik"><img class="types" src="images/electrik.png" alt=""></a>
+            <a href="pokemon.html?type=sol"><img class="types" src="images/sol.png" alt=""></a>
+            <a href="pokemon.html?type=vol"><img class="types" src="images/vol.png" alt=""></a>
+            <a href="pokemon.html?type=insecte"><img class="types" src="images/insecte.png" alt=""></a>
+            <a href="pokemon.html?type=normal"><img class="types" src="images/normal.png" alt=""></a>
+            <a href="pokemon.html?type=poison"><img class="types" src="images/poison.png" alt=""></a>
+            <a href="pokemon.html?type=combat"><img class="types" src="images/combat.png" alt=""></a>
+            <a href="pokemon.html?type=fée"><img class="types" src="images/fee.png" alt=""></a>
+            <a href="pokemon.html?type=acier"><img class="types" src="images/acier.png" alt=""></a>
+            <a href="pokemon.html?type=psy"><img class="types" src="images/psy.png" alt=""></a>
+            <a href="pokemon.html?type=roche"><img class="types" src="images/roche.png" alt=""></a>
+            <a href="pokemon.html?type=spectre"><img class="types" src="images/spectre.png" alt=""></a>
+            <a href="pokemon.html?type=ténèbres"><img class="types" src="images/tenebres.png" alt=""></a>
+            <a href="pokemon.html?type=dragon"><img class="types" src="images/dragon.png" alt=""></a>
+            <a href="pokemon.html?type=glace"><img class="types" src="images/glace.png" alt=""></a>
+        </div>
+        <div class="type-container">
+            <div class="type"></div>
+            <div id="pokemon-type"></div>
+        </div>
+        <div id="wrapper"></div>
+        <a href="#header">
+            <div id="top-of-page"><i class="fa-solid fa-arrow-up"></i></div>
+        </a>
+        <div class="fiche">
+            <div id="close-card"><i class="fa-solid fa-circle-xmark"></i></div>
+            <div class="header">
+                <p id="name-fiche"></p>
+                <div class="block-element">
+                    <div class="block-img-element"></div>
+                    <div class="block-type"></div>
+                </div>
+            </div>
+            <div class="img-container"><img id="img-poke-fiche" src="" /></div>
+            <div id="stats">
+                <div class="stat">
+                    <p class="stat-desc stat-desc-atk">Atk:</p>
+                    <p class="stat-desc stat-desc-def">Def:</p>
+                    <p class="stat-desc stat-desc-hp">Hp:</p>
+                    <p class="stat-desc stat-desc-spe-atk">Spe_Atk:</p>
+                    <p class="stat-desc stat-desc-spe-def">Spe_Def:</p>
+                    <p class="stat-desc stat-desc-vit">Vit:</p>
+                </div>
+                <div class="block-range">
+                    <div class="container-range">
+                        <div class="range-container"><span class="range range-atk"></span></div>
+                    </div>
+                    <div class="stat">
+                        <div class="container-range">
+                            <div class="range-container"><span class="range range-def"></span></div>
+                        </div>
+                    </div>
+                    <div class="stat">
+                        <div class="container-range">
+                            <div class="range-container"><span class="range range-hp"></span></div>
+                        </div>
+                    </div>
+                    <div class="stat">
+                        <div class="container-range">
+                            <div class="range-container"><span class="range range-spe-atk"></span></div>
+                        </div>
+                    </div>
+                    <div class="stat">
+                        <div class="container-range">
+                            <div class="range-container"><span class="range range-spe-def"></span></div>
+                        </div>
+                    </div>
+                    <div class="stat">
+                        <div class="container-range">
+                            <div class="range-container"><span class="range range-vit"></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="fichePoke.js"></script>
+    </body>
+</html>
