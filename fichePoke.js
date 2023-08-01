@@ -35,17 +35,6 @@ function apiCall() {
     .then((data) => {
       pokemonList = data.filter((pokemon) => pokemon !== undefined);      
       
-      window.addEventListener('popstate', (e) => {
-        const previousPageNumber = e.state?.page;
-        if (previousPageNumber !== undefined) {
-          first = previousPageNumber * numbersOfItems;
-          displayData();
-        }else{
-          location.reload()
-        }
-        
-      });
-      
       isFetchingData = false; // Réinitialise le drapeau une fois que les données sont prêtes
       
       displayPokemonsByType()

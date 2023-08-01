@@ -177,7 +177,7 @@ box-shadow: rgba(0, 0, 0, 1.15) 1.95px 1.95px 2.6px;
     align-items: center; 
     border-radius: 3px;
     flex-wrap: wrap;
-    max-width: 150vh;
+    max-width: 100vh;
     margin: 10px;
     padding: 20px 0;
     position: relative;
@@ -218,8 +218,13 @@ box-shadow: rgba(0, 0, 0, 1.15) 1.95px 1.95px 2.6px;
     }
 
     #see-more{
-       /* opacity: 0; */
+       opacity: 0.7;
        font-size: 13px;
+       margin-bottom: 20px;
+       cursor: pointer;
+       color: #ffe;
+       border: 1px solid;
+       padding: 5px;
     }
     
     .pokemon:hover{
