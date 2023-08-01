@@ -6,6 +6,7 @@ let allDisplayedPokemonsHTML = "";
 
 let isFetchingData = false; // Variable de contrôle pour indiquer si l'appel à l'API est en cours
 
+
 function apiCall() {
   if (isFetchingData) {
     return; // Si un appel à l'API est déjà en cours, on ne lance pas une nouvelle requête
@@ -162,6 +163,7 @@ function handlePokemonClick(event) {
     getStats(selectedPokemon);
     getColorType(selectedPokemon);
     displayPokeInfo(selectedPokemon);
+    console.log(selectedPokemon)
   }
 
 }

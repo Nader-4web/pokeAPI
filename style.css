@@ -14,7 +14,7 @@ body{
 
 
 .loading{
- position:fixed;background-color:#ffe;opacity:1;inset:0;transform:scale(1);transition:2s;animation:chargement 0s 2s forwards;display:flex;justify-content:center;align-items:center;z-index:2000;
+ position:fixed;background-color:#ffe;opacity:1;inset:0;transform:scale(1);transition:2s;animation:chargement 0s 1s forwards;display:flex;justify-content:center;align-items:center;z-index:2000;
 }
 
 @keyframes chargement{
