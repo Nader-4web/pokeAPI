@@ -4,6 +4,7 @@ let batchSize = 18; // Le nombre de Pokémon à afficher à la fois
 let currentIndex = 0;
 let allDisplayedPokemonsHTML = "";
 
+
 let isFetchingData = false; // Variable de contrôle pour indiquer si l'appel à l'API est en cours
 
 
@@ -160,10 +161,10 @@ function handlePokemonClick(event) {
     fiche.style.display = "block";
     fiche.style.top = `${scrollValue}px`;
     document.querySelector(".overlay").style.display = "block";
+    const wrapper = document.getElementById("wrapper");
     getStats(selectedPokemon);
     getColorType(selectedPokemon);
     displayPokeInfo(selectedPokemon);
-    console.log(selectedPokemon)
   }
 
 }
