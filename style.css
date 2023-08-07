@@ -159,6 +159,13 @@ body{
 }
 
 
+.types-container-elements{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
 #pokemon-type{
     text-shadow: rgba(0, 0, 0, 1.15) 1.95px 1.95px 2.6px;
 }

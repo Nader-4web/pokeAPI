@@ -1,12 +1,9 @@
-// let numbersOfItems = 26;
 let pokemonList = [];
 let batchSize = 18; // Le nombre de Pokémon à afficher à la fois
-let currentIndex = 0;
+let currentIndex = 1;
 let allDisplayedPokemonsHTML = "";
 
-
 let isFetchingData = false; // Variable de contrôle pour indiquer si l'appel à l'API est en cours
-
 
 function apiCall() {
   if (isFetchingData) {
@@ -15,30 +12,30 @@ function apiCall() {
 
   isFetchingData = true; // Définit le drapeau pour indiquer que l'appel à l'API est en cours
 
-  Promise.all(
-    Array.from({ length: 1010 }, (_, i) =>
-      fetch(`https://api-pokemon-fr.vercel.app/api/v1/pokemon/${i + 1}`)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          return response.json();
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        })
-    )
-  )
+  // Utilisez l'indice de départ (currentIndex) pour récupérer les Pokémon suivants
+  fetch(`https://api-pokemon-fr.vercel.app/api/v1/pokemon`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
     .then((data) => {
+      console.log(data)
       pokemonList = data.filter((pokemon) => pokemon !== undefined);      
       
       isFetchingData = false; // Réinitialise le drapeau une fois que les données sont prêtes
        
       displayData();
       search(data)
+    })
+    .catch((error) => {
+      console.error("Error:", error);
     });
- 
 }
+
+// Appeler apiCall() au chargement initial pour afficher les premiers 18 Pokémon
+
 
 apiCall()
 closeCard()
@@ -65,12 +62,11 @@ const colours = {
 	Fée: '#D685AD',
 };
 
-
 let selectedPokemon; // Déclaration de la variable à l'extérieur de la fonction displayData()
 
 function displayData() {
- 
   const displayedPokemons = pokemonList.slice(currentIndex, currentIndex + batchSize);
+  console.log(displayedPokemons)
   let htmlContent = "";
   displayedPokemons.forEach((pokemon) => {
     let type = pokemon.types[0].name;
