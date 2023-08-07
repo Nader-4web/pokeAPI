@@ -21,7 +21,6 @@ function apiCall() {
       return response.json();
     })
     .then((data) => {
-      console.log(data)
       pokemonList = data.filter((pokemon) => pokemon !== undefined);      
       
       isFetchingData = false; // Réinitialise le drapeau une fois que les données sont prêtes
@@ -66,7 +65,6 @@ let selectedPokemon; // Déclaration de la variable à l'extérieur de la foncti
 
 function displayData() {
   const displayedPokemons = pokemonList.slice(currentIndex, currentIndex + batchSize);
-  console.log(displayedPokemons)
   let htmlContent = "";
   displayedPokemons.forEach((pokemon) => {
     let type = pokemon.types[0].name;
