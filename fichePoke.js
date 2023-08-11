@@ -8,6 +8,11 @@ let pokemonList = [];
 let batchSize = 18; // Le nombre de Pokémon à afficher à la fois
 let currentIndex = 0;
 let allDisplayedPokemonsHTML = "";
+let filteredPokemons;
+
+let type1 = "Eau";
+let type2 = "Vol"
+
 
 let isFetchingData = false; // Variable de contrôle pour indiquer si l'appel à l'API est en cours
 
@@ -17,10 +22,8 @@ function apiCall() {
   }
 
   isFetchingData = true; // Définit le drapeau pour indiquer que l'appel à l'API est en cours
-
-  Promise.all(
-    Array.from({ length: 1010 }, (_, i) =>
-      fetch(`https://api-pokemon-fr.vercel.app/api/v1/pokemon/${i + 1}`)
+ 
+      fetch(`https://api-pokemon-fr.vercel.app/api/v1/pokemon`)
         .then((response) => {
           if (!response.ok) {
             throw new Error("Network response was not ok");
@@ -30,11 +33,13 @@ function apiCall() {
         .catch((error) => {
           console.error("Error:", error);
         })
-    )
-  )
+  
     .then((data) => {
-      pokemonList = data.filter((pokemon) => pokemon !== undefined);      
-      
+      pokemonList = data.filter((pokemon) => pokemon !== undefined && pokemon !== null)
+      startIndex = 1;
+      filteredData = pokemonList.slice(startIndex)
+      filteredPokemons = filteredData.filter((p) => p.types.some((type) => type.name === capitalizedType));
+    
       isFetchingData = false; // Réinitialise le drapeau une fois que les données sont prêtes
       
       displayPokemonsByType()
@@ -46,7 +51,6 @@ function apiCall() {
   
 apiCall()
 closeCard()
-
 
 
 const colours = {
@@ -177,8 +181,8 @@ let selectedPokemon; // Déclaration de la variable à l'extérieur de la foncti
 function displayPokemonsByType(){
  
   const wrapper = document.getElementById("wrapper");
-  const pokemonType = pokemonList.filter((p) => p.types.some((type) => type.name === capitalizedType));
-  const displayedPokemons = pokemonType.slice(currentIndex, currentIndex + batchSize);
+ 
+  const displayedPokemons = filteredPokemons.slice(currentIndex, currentIndex + batchSize);
 
   let htmlContent = "";
 
@@ -316,13 +320,21 @@ function normalizeString(str) {
 }
 
 
+// let textValue = document.getElementById("textvalue").value;
+// fetch(`https://api-pokemon-fr.vercel.app/api/v1/pokemon/${textValue}`)
+// .then(response => response.json())
+// .then((pok) =>{
+//   console.log(pok)
+//   search(pok)
 
-function search(data) {
+// })
+// .catch(error => console.error("Error:", error));
+
+function search(pokemon) {
   let notFoundBloc = document.getElementById("not-found");
-
   function performSearch() {
     let textValue = document.getElementById("textvalue").value;
-    let searchResult = data.find((item) => {
+    let searchResult = pokemon.find((item) => {
       return normalizeString(item.name.fr) === normalizeString(textValue) || item.pokedexId.toString() === textValue;
     });
 
@@ -346,7 +358,6 @@ function search(data) {
       notFoundBloc.classList.add("fade-in");
       notFoundBloc.innerText = "Pokémon introuvable !";
 
-      // Supprimer la classe fade-in après un court délai (par exemple 3 secondes)
       setTimeout(() => {
         notFoundBloc.innerText=""
         notFoundBloc.classList.remove("fade-in");
@@ -367,7 +378,6 @@ function search(data) {
   let submit = document.getElementById("submit");
   submit.addEventListener("click", performSearch);
 }
-
 
  ////////////////////////////////////////// SECTION FICHE POKEMON  ///////////////////////////
 
@@ -419,8 +429,6 @@ function getStats(selectedPokemon) {
 function displayPokeInfo(selectedPokemon) {
   let fiche = document.querySelector(".fiche");
   fiche.classList.add("fade-in")
-
-
   let imgPoke = document.getElementById("img-poke-fiche");
   imgPoke.src = selectedPokemon.sprites.regular;
   document.getElementById("name-fiche").innerHTML =  selectedPokemon.pokedexId.toString().padStart(3, "0") + "# " + selectedPokemon.name.fr;
@@ -481,13 +489,13 @@ function getColorType(selectedPokemon){
 
 /////////////////////////    BLOCK SEARCH   ///////////////////////////
 
-function displayCardSearch(pkmName) {
-  document.getElementById("name-fiche").innerHTML = pkmName.pokedexId.toString().padStart(3, "0") +"# " + pkmName.name.fr  
+function displayCardSearch(pokemon) {
+  document.getElementById("name-fiche").innerHTML = pokemon.pokedexId.toString().padStart(3, "0") +"# " + pokemon.name.fr  
   let imgPoke = document.getElementById("img-poke-fiche");
-  imgPoke.src = pkmName.sprites.regular;
+  imgPoke.src = pokemon.sprites.regular;
   
   const containerElement = document.querySelector(".block-img-element");
-  const imageElements = pkmName.types.map((type) => {
+  const imageElements = pokemon.types.map((type) => {
     if (type.image) {
       const imgElement = document.createElement("img");
       imgElement.src = type.image;
@@ -510,7 +518,7 @@ function displayCardSearch(pkmName) {
   // Effacer le contenu existant du conteneur
   blockType.innerHTML = "";
 
-  const elements = pkmName.types.map((type) => {
+  const elements = pokemon.types.map((type) => {
     if (type.name) {
       const element = document.createElement("p");
       element.classList.add("element");
@@ -530,13 +538,13 @@ function displayCardSearch(pkmName) {
 
 
 
-function getStatsSearch(pkmName){
-  const atk = pkmName.stats.atk;
-  const def =  pkmName.stats.def
-  const hp =  pkmName.stats.hp
-  const speAtk =  pkmName.stats.spe_atk
-  const speDef =  pkmName.stats.spe_def
-  const vit =  pkmName.stats.vit
+function getStatsSearch(pokemon){
+  const atk = pokemon.stats.atk;
+  const def =  pokemon.stats.def
+  const hp =  pokemon.stats.hp
+  const speAtk =  pokemon.stats.spe_atk
+  const speDef =  pokemon.stats.spe_def
+  const vit =  pokemon.stats.vit
 
   let rangeAtk = document.querySelector(".range-atk")
   let rangeDef =  document.querySelector(".range-def")
@@ -544,12 +552,12 @@ function getStatsSearch(pkmName){
   let rangeSpeAtk =  document.querySelector(".range-spe-atk")
   let rangeSpeDef =  document.querySelector(".range-spe-def")
   let rangeVit =  document.querySelector(".range-vit")
-  document.querySelector(".stat-desc-atk").innerHTML= "Atk: "+ pkmName.stats.atk
-  document.querySelector(".stat-desc-def").innerHTML= "Def: "+ pkmName.stats.def
-  document.querySelector(".stat-desc-hp").innerHTML= "Hp: "+ pkmName.stats.hp
-  document.querySelector(".stat-desc-spe-atk").innerHTML= "Spe-atk: "+ pkmName.stats.spe_atk
-  document.querySelector(".stat-desc-spe-def").innerHTML= "Spe-def: "+ pkmName.stats.spe_def
-  document.querySelector(".stat-desc-vit").innerHTML= "Vit: "+ pkmName.stats.vit
+  document.querySelector(".stat-desc-atk").innerHTML= "Atk: "+ pokemon.stats.atk
+  document.querySelector(".stat-desc-def").innerHTML= "Def: "+ pokemon.stats.def
+  document.querySelector(".stat-desc-hp").innerHTML= "Hp: "+ pokemon.stats.hp
+  document.querySelector(".stat-desc-spe-atk").innerHTML= "Spe-atk: "+ pokemon.stats.spe_atk
+  document.querySelector(".stat-desc-spe-def").innerHTML= "Spe-def: "+ pokemon.stats.spe_def
+  document.querySelector(".stat-desc-vit").innerHTML= "Vit: "+ pokemon.stats.vit
   rangeAtk.style.width= `${atk}%`
   rangeDef.style.width= `${def}%`
   rangeHp.style.width= `${hp}%`
@@ -560,9 +568,9 @@ function getStatsSearch(pkmName){
 }
 
 
-function getColorTypeSearch(pkmName){
+function getColorTypeSearch(pokemon){
 const card = document.querySelector(".fiche");
-let firstType = pkmName.types[0].name
+let firstType = pokemon.types[0].name
 card.style.backgroundColor= colours[firstType]
 
 }

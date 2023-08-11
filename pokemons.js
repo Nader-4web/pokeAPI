@@ -5,6 +5,7 @@ let allDisplayedPokemonsHTML = "";
 
 let isFetchingData = false; // Variable de contrôle pour indiquer si l'appel à l'API est en cours
 
+
 function apiCall() {
   if (isFetchingData) {
     return; // Si un appel à l'API est déjà en cours, on ne lance pas une nouvelle requête
@@ -21,7 +22,7 @@ function apiCall() {
       return response.json();
     })
     .then((data) => {
-      pokemonList = data.filter((pokemon) => pokemon !== undefined);      
+      pokemonList = data.filter((pokemon) => pokemon !== undefined);     
       
       isFetchingData = false; // Réinitialise le drapeau une fois que les données sont prêtes
        
