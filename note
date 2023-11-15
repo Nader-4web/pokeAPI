@@ -1,0 +1,7 @@
+// Filtre par 2 types   
+      
+filteredData = pokemonList.slice(startIndex)
+filteredPokemons = filteredData.filter((p) => 
+  p.types.some((type) => type.name === capitalizedType) &&
+  p.types.some((type) => type.name === "Vol")
+);

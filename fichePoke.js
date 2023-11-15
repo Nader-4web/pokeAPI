@@ -23,7 +23,7 @@ function apiCall() {
 
   isFetchingData = true; // Définit le drapeau pour indiquer que l'appel à l'API est en cours
  
-      fetch(`https://api-pokemon-fr.vercel.app/api/v1/pokemon`)
+      fetch(`https://tyradex.vercel.app/api/v1/pokemon`)
         .then((response) => {
           if (!response.ok) {
             throw new Error("Network response was not ok");
